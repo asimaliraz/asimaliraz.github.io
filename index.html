@@ -4,382 +4,375 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asim Ali Raza — Flutter Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #070710;
-    --surface: #0F0F1A;
-    --surface2: #15151F;
-    --accent: #7C6FFF;
-    --accent2: #FF6B6B;
-    --accent3: #00E5A0;
-    --gold: #FFD700;
-    --text: #EEEDF8;
-    --muted: #6B6A82;
-    --border: rgba(124,111,255,0.12);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+:root{
+  --bg:#FAFAFA;
+  --bg2:#F4F4F5;
+  --s1:#FFFFFF;
+  --s2:#F1F5F9;
+  --ac:#0F172A;
+  --ac2:#1E293B;
+  --hi:#2563EB;
+  --hi2:#3B82F6;
+  --gr:#10B981;
+  --am:#F59E0B;
+  --rs:#EF4444;
+  --pk:#8B5CF6;
+  --tx:#0F172A;
+  --mt:#64748B;
+  --lt:#94A3B8;
+  --bd:#E2E8F0;
+  --bd2:#CBD5E1;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;font-size:15px;line-height:1.6;}
 
-  /* noise */
-  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;padding:0 80px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,250,250,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);}
+.nlogo{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:18px;color:var(--tx);letter-spacing:-.3px;}
+.nlogo em{font-style:normal;color:var(--hi);}
+.nlinks{display:flex;gap:8px;list-style:none;align-items:center;}
+.nlinks a{color:var(--mt);text-decoration:none;font-size:14px;font-weight:500;padding:6px 14px;border-radius:8px;transition:all .18s;}
+.nlinks a:hover{color:var(--tx);background:var(--bg2);}
+.nhire{background:var(--tx) !important;color:#fff !important;padding:8px 20px !important;border-radius:8px;font-weight:600 !important;font-size:13.5px !important;}
+.nhire:hover{background:var(--ac2) !important;color:#fff !important;}
 
-  /* cursor glow */
-  .cglow{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,255,0.07) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:1;transition:left .08s,top .08s;}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 80px 80px;position:relative;background:var(--bg);}
+.hero-line{position:absolute;inset:0;background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:44px 44px;opacity:.4;pointer-events:none;}
+.hero-fade{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 40%,rgba(250,250,250,0) 0%,var(--bg) 80%);pointer-events:none;}
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 64px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,16,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
-  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px;}
-  .nav-logo span{color:var(--accent);}
-  .nav-links{display:flex;gap:32px;list-style:none;}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}
-  .nav-links a:hover{color:var(--text);}
-  .nav-cta{background:var(--accent);color:#fff !important;padding:9px 22px;border-radius:100px;font-weight:600 !important;transition:box-shadow .2s !important;}
-  .nav-cta:hover{box-shadow:0 0 30px rgba(124,111,255,.45);}
+.hcontent{max-width:680px;position:relative;z-index:2;}
+.hbadge{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--bd2);background:var(--s1);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;color:var(--mt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .5s ease both;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.hbadge svg{width:12px;height:12px;color:var(--gr);}
 
-  /* HERO */
-  .hero{min-height:100vh;display:flex;align-items:center;padding:120px 64px 80px;position:relative;overflow:hidden;}
-  .hero-orb1{position:absolute;top:-120px;right:-80px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,255,.11) 0%,transparent 65%);pointer-events:none;}
-  .hero-orb2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.07) 0%,transparent 65%);pointer-events:none;}
-  .hero-grid-line{position:absolute;inset:0;background-image:linear-gradient(rgba(124,111,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,111,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(52px,7vw,90px);font-weight:800;line-height:.96;letter-spacing:-3px;margin-bottom:26px;animation:fadeUp .5s .1s ease both;color:var(--tx);}
+.h1g{background:linear-gradient(135deg,var(--hi),var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-  .hero-content{max-width:680px;position:relative;z-index:2;}
+.hdesc{font-size:17px;line-height:1.78;color:var(--mt);max-width:500px;margin-bottom:40px;font-weight:400;animation:fadeUp .5s .2s ease both;}
+.hdesc strong{color:var(--tx);font-weight:600;}
 
-  .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.22);padding:7px 18px;border-radius:100px;font-size:13px;color:var(--accent);font-weight:500;margin-bottom:30px;animation:fadeUp .6s ease both;}
-  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent3);animation:blink 2s ease infinite;}
-  @keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.75);}}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .3s ease both;}
+.bp{background:var(--tx);color:#fff;padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 2px 8px rgba(15,23,42,.18);}
+.bp:hover{background:var(--ac2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(15,23,42,.22);}
+.bp svg{width:15px;height:15px;}
+.bg2{color:var(--tx);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:1.5px solid var(--bd2);background:var(--s1);transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.bg2:hover{border-color:var(--bd);background:var(--bg2);transform:translateY(-1px);}
 
-  .hero h1{font-family:'Syne',sans-serif;font-size:clamp(44px,6.5vw,82px);font-weight:800;line-height:1.0;letter-spacing:-2.5px;margin-bottom:22px;animation:fadeUp .6s .1s ease both;}
-  .h1-muted{color:var(--muted);}
-  .h1-accent{color:var(--accent);}
-  .h1-outline{-webkit-text-stroke:1.5px rgba(124,111,255,.4);color:transparent;}
+/* hero stats */
+.hstats{position:absolute;right:80px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:2;animation:fadeLeft .7s .4s ease both;}
+.hsc{background:var(--s1);border:1.5px solid var(--bd);border-radius:16px;padding:20px 28px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.hsn{font-family:'Bricolage Grotesque',sans-serif;font-size:36px;font-weight:800;line-height:1;color:var(--tx);}
+.hsl{font-size:11px;color:var(--lt);margin-top:4px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;}
 
-  .hero-desc{font-size:17px;line-height:1.75;color:var(--muted);max-width:500px;margin-bottom:36px;font-weight:300;animation:fadeUp .6s .2s ease both;}
-  .hero-desc strong{color:var(--text);font-weight:500;}
+/* MARQUEE */
+.mq{padding:16px 0;background:var(--s1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);overflow:hidden;}
+.mqi{display:flex;gap:36px;animation:mq 26s linear infinite;white-space:nowrap;}
+.mqi:hover{animation-play-state:paused;}
+.mit{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--lt);flex-shrink:0;letter-spacing:.2px;}
+.mit svg{width:13px;height:13px;color:var(--hi2);}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .6s .3s ease both;}
-  .btn-p{background:var(--accent);color:#fff;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(124,111,255,.3);}
-  .btn-p:hover{transform:translateY(-2px);box-shadow:0 0 55px rgba(124,111,255,.5);}
-  .btn-g{color:var(--text);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:border-color .2s,background .2s;}
-  .btn-g:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);}
+/* SECTIONS */
+section{padding:100px 80px;position:relative;}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--hi);margin-bottom:14px;}
+.sh{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1.06;margin-bottom:12px;color:var(--tx);}
+.sp{color:var(--mt);font-size:15.5px;max-width:440px;line-height:1.75;font-weight:400;margin-bottom:52px;}
 
-  /* stats sidebar */
-  .hero-stats{position:absolute;right:64px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:16px;z-index:2;animation:fadeLeft .8s .4s ease both;}
-  .scard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px 28px;text-align:center;position:relative;overflow:hidden;}
-  .scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);}
-  .snum{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--accent);line-height:1;}
-  .slabel{font-size:11px;color:var(--muted);margin-top:4px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;}
+/* divider */
+.sdiv{width:40px;height:3px;background:var(--hi);border-radius:100px;margin-bottom:16px;}
 
-  /* MARQUEE */
-  .marquee-wrap{padding:20px 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;}
-  .marquee-inner{display:flex;gap:44px;animation:marquee 22s linear infinite;white-space:nowrap;}
-  .mitem{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;color:var(--muted);flex-shrink:0;}
-  .mdot{width:5px;height:5px;border-radius:50%;background:var(--accent);}
-  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ABOUT */
+.agsec{background:var(--s1);}
+.ag{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+.at p{color:var(--mt);font-size:15.5px;line-height:1.85;font-weight:400;margin-bottom:18px;}
+.at p strong{color:var(--tx);font-weight:600;}
+.achips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.achip{font-size:12px;font-weight:600;padding:5px 13px;border-radius:100px;border:1.5px solid var(--bd);background:var(--bg2);color:var(--mt);}
 
-  /* SECTIONS */
-  section{padding:100px 64px;position:relative;z-index:2;}
-  .slabel-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
-  .slabel-tag::before{content:'';width:22px;height:2px;background:var(--accent);}
-  .stitle{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px;}
-  .ssub{color:var(--muted);font-size:16px;max-width:480px;line-height:1.75;font-weight:300;margin-bottom:56px;}
+.acard{background:var(--bg);border:1.5px solid var(--bd);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.aci{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--bd);transition:background .15s;}
+.aci:last-child{border-bottom:none;}
+.aci:hover{background:var(--bg2);}
+.aci-ic{width:38px;height:38px;border-radius:10px;background:var(--bg2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.aci-ic svg{width:17px;height:17px;color:var(--hi);}
+.aci-lb{font-size:11px;color:var(--lt);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px;}
+.aci-vl{font-size:13.5px;font-weight:500;color:var(--tx);}
 
-  /* ABOUT */
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
-  .about-text p{color:var(--muted);font-size:16px;line-height:1.8;font-weight:300;margin-bottom:20px;}
-  .about-text p strong{color:var(--text);font-weight:500;}
-  .about-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
-  .achip{background:rgba(124,111,255,.08);border:1px solid rgba(124,111,255,.18);color:var(--accent);font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;letter-spacing:.3px;}
-  .about-card{background:var(--surface);border:1px solid var(--border);border-radius:28px;padding:36px;position:relative;overflow:hidden;}
-  .about-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,255,.1) 0%,transparent 65%);}
-  .about-card-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);}
-  .about-card-item:last-child{border-bottom:none;padding-bottom:0;}
-  .aci-icon{width:44px;height:44px;border-radius:12px;background:rgba(124,111,255,.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-  .aci-label{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
-  .aci-val{font-size:14px;font-weight:500;color:var(--text);}
+/* APPS */
+.appsbg{background:var(--bg);}
+.apgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
 
-  /* APPS */
-  .apps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;}
-  .acard{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default;}
-  .acard:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.4);}
-  .acard-top{position:absolute;top:0;left:0;right:0;height:3px;border-radius:24px 24px 0 0;}
-  .acard-num{position:absolute;top:26px;right:26px;font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:rgba(255,255,255,.03);line-height:1;}
-  .acard-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;}
-  .acard-title{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px;}
-  .acard-role{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;color:var(--accent);}
-  .acard-desc{color:var(--muted);font-size:13.5px;line-height:1.7;margin-bottom:18px;font-weight:300;}
-  .acard-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px;}
-  .atag{font-size:11px;font-weight:600;padding:4px 11px;border-radius:100px;letter-spacing:.2px;}
-  .acard-foot{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--border);}
-  .aplat{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:500;}
-  .aarrow{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;transition:transform .2s;}
-  .acard:hover .aarrow{transform:rotate(45deg);}
+.apcard{background:var(--s1);border:1.5px solid var(--bd);border-radius:18px;padding:28px;position:relative;overflow:hidden;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.apcard:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:var(--bd2);}
+.apcard-bar{position:absolute;top:0;left:0;right:0;height:3px;}
+.ap-num{position:absolute;top:22px;right:22px;font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:800;color:var(--bd);line-height:1;pointer-events:none;}
+.ap-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.ap-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1.5px solid;}
+.ap-ic svg{width:22px;height:22px;}
+.ap-role{font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px;}
+.ap-title{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.3px;color:var(--tx);}
+.ap-desc{color:var(--mt);font-size:13.5px;line-height:1.72;margin-bottom:18px;font-weight:400;}
+.ap-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px;}
+.atag{font-size:11px;font-weight:600;padding:4px 11px;border-radius:100px;letter-spacing:.2px;}
+.ap-foot{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--bd);}
+.ap-plat{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--lt);font-weight:500;}
+.ap-plat svg{width:13px;height:13px;}
+.ap-arr{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;}
+.ap-arr svg{width:15px;height:15px;}
+.apcard:hover .ap-arr{transform:rotate(45deg);}
 
-  /* SKILLS */
-  .skills-bg{background:var(--surface);margin:0 -64px;padding:100px 64px;}
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
-  .skcard{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:26px;transition:border-color .2s;}
-  .skcard:hover{border-color:rgba(124,111,255,.3);}
-  .skicon{font-size:26px;margin-bottom:12px;}
-  .skname{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
-  .skdesc{font-size:12.5px;color:var(--muted);line-height:1.6;font-weight:300;}
-  .skbar-wrap{margin-top:14px;background:rgba(255,255,255,.05);border-radius:100px;height:3px;overflow:hidden;}
-  .skbar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent3));transition:width 1.6s cubic-bezier(.4,0,.2,1);}
+/* SKILLS */
+.skillsbg{background:var(--s1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);}
+.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.skcard{background:var(--bg);border:1.5px solid var(--bd);border-radius:14px;padding:24px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.03);}
+.skcard:hover{border-color:var(--bd2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.07);}
+.sk-ic{width:40px;height:40px;border-radius:10px;background:var(--bg2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.sk-ic svg{width:20px;height:20px;color:var(--hi);}
+.skn{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:var(--tx);}
+.skd{font-size:12.5px;color:var(--lt);line-height:1.6;font-weight:400;}
+.skbw{margin-top:14px;background:var(--bg2);border-radius:100px;height:3px;overflow:hidden;}
+.skb{height:100%;border-radius:100px;background:var(--hi);transition:width 1.5s cubic-bezier(.4,0,.2,1);}
 
-  /* CONTACT */
-  .contact-box{background:var(--surface);border:1px solid var(--border);border-radius:32px;padding:64px;text-align:center;position:relative;overflow:hidden;}
-  .contact-box::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,255,.1) 0%,transparent 65%);pointer-events:none;}
-  .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
-  .cbtn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;transition:transform .2s,box-shadow .2s;border:1px solid var(--border);color:var(--text);background:var(--surface2);}
-  .cbtn:hover{transform:translateY(-3px);border-color:rgba(124,111,255,.35);box-shadow:0 10px 30px rgba(0,0,0,.3);}
-  .cbtn.cp{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 28px rgba(124,111,255,.25);}
-  .cbtn.cp:hover{box-shadow:0 10px 45px rgba(124,111,255,.45);}
+/* CONTACT */
+.cbox{background:var(--tx);border-radius:20px;padding:72px;text-align:center;position:relative;overflow:hidden;color:#fff;}
+.cbox .stag{color:rgba(255,255,255,0.5);}
+.cbox .sh{color:#fff;margin-bottom:12px;}
+.cbox .sp{color:rgba(255,255,255,0.55);margin-bottom:0;}
+.cgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;}
+.clinks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px;position:relative;z-index:2;}
+.cbtn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;text-decoration:none;transition:all .2s;border:1.5px solid rgba(255,255,255,0.15);color:#fff;background:rgba(255,255,255,0.08);}
+.cbtn svg{width:15px;height:15px;flex-shrink:0;}
+.cbtn:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.3);transform:translateY(-2px);}
+.cbtn.cp{background:#fff;border-color:#fff;color:var(--tx);}
+.cbtn.cp:hover{background:rgba(255,255,255,0.9);}
+.cbtn.cp svg{color:var(--tx);}
 
-  /* FOOTER */
-  footer{padding:28px 64px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;}
-  footer p{color:var(--muted);font-size:12px;}
-  .flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;}
-  .flogo span{color:var(--accent);}
+/* FOOTER */
+footer{padding:24px 80px;border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;}
+footer p{color:var(--lt);font-size:13px;}
+.flogo{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;color:var(--tx);}
+.flogo em{font-style:normal;color:var(--hi);}
 
-  /* ANIMS */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeLeft{from{opacity:0;transform:translate(40px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
-  .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
-  .reveal.visible{opacity:1;transform:translateY(0);}
+/* ANIMS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translate(36px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
 
-  @media(max-width:960px){
-    nav{padding:16px 24px;}
-    .nav-links{display:none;}
-    .hero{padding:100px 24px 60px;}
-    .hero-stats{display:none;}
-    section{padding:70px 24px;}
-    .about-grid{grid-template-columns:1fr;}
-    .skills-bg{margin:0 -24px;padding:70px 24px;}
-    .contact-box{padding:40px 24px;}
-    footer{padding:24px;flex-direction:column;gap:10px;text-align:center;}
-  }
+@media(max-width:1024px){
+  nav,section,.hero,footer{padding-left:24px;padding-right:24px;}
+  .nlinks{display:none;}
+  .hstats{display:none;}
+  .ag{grid-template-columns:1fr;}
+  .cbox{padding:40px 24px;}
+}
 </style>
 </head>
 <body>
 
-<div class="cglow" id="cglow"></div>
-
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Asim<span>.</span>dev</div>
-  <ul class="nav-links">
+  <div class="nlogo">Asim<em>.</em>dev</div>
+  <ul class="nlinks">
     <li><a href="#about">About</a></li>
     <li><a href="#apps">Apps</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="mailto:asimaliraza0987@gmail.com" class="nav-cta">Hire Me</a></li>
+    <li><a href="mailto:asimaliraza0987@gmail.com" class="nhire">Hire Me</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-orb1"></div>
-  <div class="hero-orb2"></div>
-  <div class="hero-grid-line"></div>
-
-  <div class="hero-content">
-    <div class="hero-tag"><div class="live-dot"></div>Open to work — Pakistan 🇵🇰</div>
+  <div class="hero-line"></div>
+  <div class="hero-fade"></div>
+  <div class="hcontent">
+    <div class="hbadge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+      Flutter Developer
+    </div>
     <h1>
-      <span class="h1-muted">Hi, I'm</span><br>
-      <span class="h1-accent">Asim Ali</span><br>
-      <span class="h1-outline">Raza.</span>
+      Building apps<br>
+      <span class="h1g">people love</span><br>
+      to use.
     </h1>
-    <p class="hero-desc">
-      Flutter developer at <strong>Maxcore Technologies</strong> with <strong>2+ years</strong> of experience building cross-platform mobile apps — from AI-powered tools to booking platforms.
-    </p>
-    <div class="hero-btns">
-      <a href="#apps" class="btn-p">View My Apps ↓</a>
-      <a href="#contact" class="btn-g">Get In Touch</a>
+    <p class="hdesc">I'm <strong>Asim Ali Raza</strong> — a Flutter developer at <strong>Maxcore Technologies</strong> with <strong>3+ years</strong> crafting high-performance Android & iOS applications.</p>
+    <div class="hbtns">
+      <a href="#apps" class="bp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        View My Apps
+      </a>
+      <a href="#contact" class="bg2">Get In Touch</a>
     </div>
   </div>
-
-  <div class="hero-stats">
-    <div class="scard">
-      <div class="snum">2+</div>
-      <div class="slabel">Years Exp.</div>
-    </div>
-    <div class="scard">
-      <div class="snum">3+</div>
-      <div class="slabel">Apps Built</div>
-    </div>
-    <div class="scard">
-      <div class="snum">2</div>
-      <div class="slabel">Platforms</div>
-    </div>
+  <div class="hstats">
+    <div class="hsc"><div class="hsn">3+</div><div class="hsl">Years Exp.</div></div>
+    <div class="hsc"><div class="hsn">3+</div><div class="hsl">Apps Built</div></div>
+    <div class="hsc"><div class="hsn">2</div><div class="hsl">Platforms</div></div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-inner" id="marquee">
-    <span class="mitem"><span class="mdot"></span>Flutter</span>
-    <span class="mitem"><span class="mdot"></span>Dart</span>
-    <span class="mitem"><span class="mdot"></span>REST APIs</span>
-    <span class="mitem"><span class="mdot"></span>Provider</span>
-    <span class="mitem"><span class="mdot"></span>Firebase</span>
-    <span class="mitem"><span class="mdot"></span>GetX</span>
-    <span class="mitem"><span class="mdot"></span>Laravel</span>
-    <span class="mitem"><span class="mdot"></span>Supabase</span>
-    <span class="mitem"><span class="mdot"></span>Video Player</span>
-    <span class="mitem"><span class="mdot"></span>FCM Push Notif</span>
-    <span class="mitem"><span class="mdot"></span>AI Integration</span>
-    <span class="mitem"><span class="mdot"></span>Android & iOS</span>
-    <span class="mitem"><span class="mdot"></span>Git</span>
-    <span class="mitem"><span class="mdot"></span>Figma</span>
-    <!-- duplicate -->
-    <span class="mitem"><span class="mdot"></span>Flutter</span>
-    <span class="mitem"><span class="mdot"></span>Dart</span>
-    <span class="mitem"><span class="mdot"></span>REST APIs</span>
-    <span class="mitem"><span class="mdot"></span>Provider</span>
-    <span class="mitem"><span class="mdot"></span>Firebase</span>
-    <span class="mitem"><span class="mdot"></span>GetX</span>
-    <span class="mitem"><span class="mdot"></span>Laravel</span>
-    <span class="mitem"><span class="mdot"></span>Supabase</span>
-    <span class="mitem"><span class="mdot"></span>Video Player</span>
-    <span class="mitem"><span class="mdot"></span>FCM Push Notif</span>
-    <span class="mitem"><span class="mdot"></span>AI Integration</span>
-    <span class="mitem"><span class="mdot"></span>Android & iOS</span>
-    <span class="mitem"><span class="mdot"></span>Git</span>
-    <span class="mitem"><span class="mdot"></span>Figma</span>
+<div class="mq">
+  <div class="mqi">
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Flutter</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Dart</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Provider</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Firebase & FCM</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>REST APIs</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>GetX</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m8 21 4-4 4 4M12 17v4"/></svg>Supabase</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>AI Integration</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Git</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Figma</span>
+    <!-- dup -->
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Flutter</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Dart</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Provider</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Firebase & FCM</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>REST APIs</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>GetX</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="m8 21 4-4 4 4M12 17v4"/></svg>Supabase</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>AI Integration</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Git</span>
+    <span class="mit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Figma</span>
   </div>
 </div>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="reveal">
-    <div class="slabel-tag">About Me</div>
-    <h2 class="stitle">Who I Am</h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>I'm <strong>Asim Ali Raza</strong>, a Flutter developer based in Pakistan with <strong>2+ years of hands-on experience</strong> building production-ready mobile applications.</p>
-      <p>Currently working at <strong>Maxcore Technologies</strong>, I specialize in creating smooth, scalable, and beautiful cross-platform apps. From integrating AI APIs to building real-time chat systems — I love turning complex ideas into clean apps.</p>
-      <p>I care deeply about <strong>code quality, UI polish, and user experience</strong>. Every pixel and every line of code matters to me.</p>
-      <div class="about-chips">
+<section id="about" class="agsec">
+  <div class="rv"><div class="stag">About</div><div class="sdiv"></div><h2 class="sh">Who I Am</h2></div>
+  <div class="ag">
+    <div class="at rv">
+      <p>I'm <strong>Asim Ali Raza</strong>, a Flutter developer with <strong>3+ years of experience</strong> building production-ready apps for Android and iOS. I currently work at <strong>Maxcore Technologies</strong> where I lead mobile development on complex, real-world products.</p>
+      <p>I specialize in clean architecture, seamless API integrations, and polished UI — from AI-powered tools to real-time platforms. I care about every detail: performance, UX, and code quality.</p>
+      <div class="achips">
         <span class="achip">Clean Architecture</span>
         <span class="achip">API Integration</span>
         <span class="achip">State Management</span>
         <span class="achip">UI/UX Polish</span>
+        <span class="achip">Real-time Apps</span>
         <span class="achip">Performance</span>
-        <span class="achip">Team Player</span>
       </div>
     </div>
-    <div class="about-card reveal">
-      <div class="about-card-item">
-        <div class="aci-icon">🏢</div>
-        <div>
-          <div class="aci-label">Company</div>
-          <div class="aci-val">Maxcore Technologies</div>
-        </div>
+    <div class="acard rv">
+      <div class="aci">
+        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div><div class="aci-lb">Company</div><div class="aci-vl">Maxcore Technologies</div></div>
       </div>
-      <div class="about-card-item">
-        <div class="aci-icon">📍</div>
-        <div>
-          <div class="aci-label">Location</div>
-          <div class="aci-val">Pakistan 🇵🇰</div>
-        </div>
+      <div class="aci">
+        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="aci-lb">Location</div><div class="aci-vl">Pakistan</div></div>
       </div>
-      <div class="about-card-item">
-        <div class="aci-icon">⏱️</div>
-        <div>
-          <div class="aci-label">Experience</div>
-          <div class="aci-val">2+ Years Flutter Development</div>
-        </div>
+      <div class="aci">
+        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div><div class="aci-lb">Experience</div><div class="aci-vl">3+ Years Flutter</div></div>
       </div>
-      <div class="about-card-item">
-        <div class="aci-icon">📱</div>
-        <div>
-          <div class="aci-label">Platforms</div>
-          <div class="aci-val">Android & iOS</div>
-        </div>
+      <div class="aci">
+        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div><div class="aci-lb">Platforms</div><div class="aci-vl">Android & iOS</div></div>
       </div>
-      <div class="about-card-item">
-        <div class="aci-icon">✉️</div>
-        <div>
-          <div class="aci-label">Email</div>
-          <div class="aci-val">asimaliraza0987@gmail.com</div>
-        </div>
+      <div class="aci">
+        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="aci-lb">Email</div><div class="aci-vl">asimaliraza0987@gmail.com</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- APPS -->
-<section id="apps" style="background:var(--surface);margin:0 -64px;padding:100px 64px;">
-  <div class="reveal">
-    <div class="slabel-tag">My Work</div>
-    <h2 class="stitle">Apps I've Built</h2>
-    <p class="ssub">Real-world Flutter applications — clean code, production-ready architecture, smooth UX.</p>
-  </div>
-
-  <div class="apps-grid">
+<section id="apps" class="appsbg">
+  <div class="rv"><div class="stag">My Work</div><div class="sdiv"></div><h2 class="sh">Apps I've Built</h2><p class="sp">Production-ready Flutter applications — clean code, solid architecture, polished UX.</p></div>
+  <div class="apgrid">
 
     <!-- TalentAngo -->
-    <div class="acard reveal">
-      <div class="acard-top" style="background:linear-gradient(90deg,#7C6FFF,#A99BFF);"></div>
-      <div class="acard-num">01</div>
-      <div class="acard-icon" style="background:rgba(124,111,255,.15);">🎯</div>
-      <div class="acard-title">TalentAngo</div>
-      <div class="acard-role">Job Recruitment Platform</div>
-      <div class="acard-desc">A full-featured recruitment platform with a TikTok-style video job feed, real-time chat between recruiters & candidates, membership plans with admin approval, FCM push notifications, multipart video upload, and a complete watch-time tracking system.</div>
-      <div class="acard-tags">
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">Flutter</span>
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">Provider</span>
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">Laravel API</span>
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">Video Player</span>
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">FCM</span>
-        <span class="atag" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#A99BFF;">Real-time Chat</span>
+    <div class="apcard rv">
+      <div class="apcard-bar" style="background:#2563EB;"></div>
+      <div class="ap-num">01</div>
+      <div class="ap-head">
+        <div class="ap-ic" style="background:#EFF6FF;border-color:#BFDBFE;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="ap-role" style="color:#2563EB;">Recruitment Platform</div>
+          <div class="ap-title">TalentAngo</div>
+        </div>
       </div>
-      <div class="acard-foot">
-        <div class="aplat">📱 Android & iOS</div>
-        <div class="aarrow" style="background:rgba(124,111,255,.1);border:1px solid rgba(124,111,255,.2);color:#7C6FFF;">↗</div>
+      <div class="ap-desc">Full-featured recruitment app with a TikTok-style video feed, real-time chat, membership plans, FCM push notifications, multipart video upload, and watch-time analytics system.</div>
+      <div class="ap-tags">
+        <span class="atag" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;">Flutter</span>
+        <span class="atag" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;">Provider</span>
+        <span class="atag" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;">Laravel API</span>
+        <span class="atag" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;">Video Player</span>
+        <span class="atag" style="background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;">FCM</span>
+      </div>
+      <div class="ap-foot">
+        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
+        <div class="ap-arr" style="background:#EFF6FF;border:1px solid #BFDBFE;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
       </div>
     </div>
 
     <!-- TikPrompt -->
-    <div class="acard reveal">
-      <div class="acard-top" style="background:linear-gradient(90deg,#FF6B6B,#FF9A9E);"></div>
-      <div class="acard-num">02</div>
-      <div class="acard-icon" style="background:rgba(255,107,107,.15);">🤖</div>
-      <div class="acard-title">TikPrompt</div>
-      <div class="acard-role">AI Image Prompt Generator</div>
-      <div class="acard-desc">An AI-powered app that generates creative image prompts. Features a polished custom UI, AI API integration for prompt generation, image preview capabilities, and a smooth content creation workflow for artists and designers.</div>
-      <div class="acard-tags">
-        <span class="atag" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF9A9E;">Flutter</span>
-        <span class="atag" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF9A9E;">AI API</span>
-        <span class="atag" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF9A9E;">Custom UI</span>
-        <span class="atag" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF9A9E;">Image Gen</span>
-        <span class="atag" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF9A9E;">REST API</span>
+    <div class="apcard rv">
+      <div class="apcard-bar" style="background:#7C3AED;"></div>
+      <div class="ap-num">02</div>
+      <div class="ap-head">
+        <div class="ap-ic" style="background:#F5F3FF;border-color:#DDD6FE;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18.5 2.5l3 3L13 14"/></svg>
+        </div>
+        <div>
+          <div class="ap-role" style="color:#7C3AED;">AI Image Tool</div>
+          <div class="ap-title">TikPrompt</div>
+        </div>
       </div>
-      <div class="acard-foot">
-        <div class="aplat">📱 Android & iOS</div>
-        <div class="aarrow" style="background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);color:#FF6B6B;">↗</div>
+      <div class="ap-desc">AI-powered image prompt generator with a custom-designed UI, AI API integration for creative prompt generation, image preview, and a smooth workflow for artists and designers.</div>
+      <div class="ap-tags">
+        <span class="atag" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9;">Flutter</span>
+        <span class="atag" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9;">AI API</span>
+        <span class="atag" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9;">Custom UI</span>
+        <span class="atag" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9;">Image Gen</span>
+        <span class="atag" style="background:#F5F3FF;border:1px solid #DDD6FE;color:#6D28D9;">REST API</span>
+      </div>
+      <div class="ap-foot">
+        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
+        <div class="ap-arr" style="background:#F5F3FF;border:1px solid #DDD6FE;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
       </div>
     </div>
 
     <!-- CoderUK -->
-    <div class="acard reveal">
-      <div class="acard-top" style="background:linear-gradient(90deg,#00E5A0,#38F9D7);"></div>
-      <div class="acard-num">03</div>
-      <div class="acard-icon" style="background:rgba(0,229,160,.15);">🔧</div>
-      <div class="acard-title">CoderUK</div>
-      <div class="acard-role">Oil Change Booking App</div>
-      <div class="acard-desc">A service booking platform focused on oil change appointments. Users can book oil change services, select time slots, manage their bookings, and get service reminders — all through a clean and intuitive mobile interface.</div>
-      <div class="acard-tags">
-        <span class="atag" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);color:#00E5A0;">Flutter</span>
-        <span class="atag" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);color:#00E5A0;">Booking System</span>
-        <span class="atag" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);color:#00E5A0;">REST API</span>
-        <span class="atag" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);color:#00E5A0;">Scheduling</span>
+    <div class="apcard rv">
+      <div class="apcard-bar" style="background:#059669;"></div>
+      <div class="ap-num">03</div>
+      <div class="ap-head">
+        <div class="ap-ic" style="background:#ECFDF5;border-color:#A7F3D0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div>
+          <div class="ap-role" style="color:#059669;">Service Booking</div>
+          <div class="ap-title">CoderUK</div>
+        </div>
       </div>
-      <div class="acard-foot">
-        <div class="aplat">📱 Android & iOS</div>
-        <div class="aarrow" style="background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.2);color:#00E5A0;">↗</div>
+      <div class="ap-desc">Oil change service booking platform with appointment scheduling, time slot management, booking history, and service reminders — clean and intuitive for both users and service providers.</div>
+      <div class="ap-tags">
+        <span class="atag" style="background:#ECFDF5;border:1px solid #A7F3D0;color:#047857;">Flutter</span>
+        <span class="atag" style="background:#ECFDF5;border:1px solid #A7F3D0;color:#047857;">Booking System</span>
+        <span class="atag" style="background:#ECFDF5;border:1px solid #A7F3D0;color:#047857;">REST API</span>
+        <span class="atag" style="background:#ECFDF5;border:1px solid #A7F3D0;color:#047857;">Scheduling</span>
+      </div>
+      <div class="ap-foot">
+        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
+        <div class="ap-arr" style="background:#ECFDF5;border:1px solid #A7F3D0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </div>
       </div>
     </div>
 
@@ -387,70 +380,70 @@
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
-  <div class="reveal">
-    <div class="slabel-tag">Expertise</div>
-    <h2 class="stitle">Skills & Stack</h2>
-    <p class="ssub">Technologies I use daily to build production-grade Flutter applications.</p>
-  </div>
-  <div class="skills-grid">
-    <div class="skcard reveal">
-      <div class="skicon">🐦</div>
-      <div class="skname">Flutter & Dart</div>
-      <div class="skdesc">Custom widgets, animations, responsive layouts, and platform-specific code.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="93" style="width:0%"></div></div>
+<section id="skills" class="skillsbg">
+  <div class="rv"><div class="stag">Expertise</div><div class="sdiv"></div><h2 class="sh">Skills & Stack</h2><p class="sp">Technologies I use daily to ship production mobile apps.</p></div>
+  <div class="skgrid">
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <div class="skn">Flutter & Dart</div>
+      <div class="skd">Custom widgets, animations, responsive layouts, platform channels.</div>
+      <div class="skbw"><div class="skb" data-w="93" style="width:0%"></div></div>
     </div>
-    <div class="skcard reveal">
-      <div class="skicon">🔄</div>
-      <div class="skname">State Management</div>
-      <div class="skdesc">Provider, GetX for scalable and maintainable app architecture.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="87" style="width:0%"></div></div>
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+      <div class="skn">State Management</div>
+      <div class="skd">Provider and GetX for scalable, clean app architecture.</div>
+      <div class="skbw"><div class="skb" data-w="88" style="width:0%"></div></div>
     </div>
-    <div class="skcard reveal">
-      <div class="skicon">🌐</div>
-      <div class="skname">REST APIs</div>
-      <div class="skdesc">HTTP client, JSON parsing, auth flows, multipart uploads, error handling.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="90" style="width:0%"></div></div>
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="skn">REST APIs</div>
+      <div class="skd">HTTP client, JSON parsing, auth, multipart uploads, error handling.</div>
+      <div class="skbw"><div class="skb" data-w="91" style="width:0%"></div></div>
     </div>
-    <div class="skcard reveal">
-      <div class="skicon">🤖</div>
-      <div class="skname">AI Integration</div>
-      <div class="skdesc">Integrating AI APIs for prompt generation, image creation, and smart features.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="78" style="width:0%"></div></div>
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <div class="skn">Firebase & FCM</div>
+      <div class="skd">Push notifications, authentication, Firestore real-time data.</div>
+      <div class="skbw"><div class="skb" data-w="83" style="width:0%"></div></div>
     </div>
-    <div class="skcard reveal">
-      <div class="skicon">🔥</div>
-      <div class="skname">Firebase & FCM</div>
-      <div class="skdesc">Push notifications, authentication, Firestore real-time data.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="82" style="width:0%"></div></div>
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <div class="skn">UI/UX Design</div>
+      <div class="skd">Pixel-perfect Figma to Flutter, custom animations, smooth UX.</div>
+      <div class="skbw"><div class="skb" data-w="86" style="width:0%"></div></div>
     </div>
-    <div class="skcard reveal">
-      <div class="skicon">🎨</div>
-      <div class="skname">UI/UX Design</div>
-      <div class="skdesc">Pixel-perfect Figma implementations, smooth animations, polished UX.</div>
-      <div class="skbar-wrap"><div class="skbar" data-w="85" style="width:0%"></div></div>
+    <div class="skcard rv">
+      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+      <div class="skn">AI Integration</div>
+      <div class="skd">AI APIs for prompt generation, image creation, smart features.</div>
+      <div class="skbw"><div class="skb" data-w="79" style="width:0%"></div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" style="padding-top:0;">
-  <div class="contact-box reveal">
-    <div class="slabel-tag" style="justify-content:center;">Let's Build Together</div>
-    <h2 class="stitle">Got a project<br>in mind?</h2>
-    <p class="ssub" style="margin:0 auto;text-align:center;max-width:400px;">
-      I'm available for freelance projects and full-time roles.
-      Let's create something great — reach out anytime.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:asimaliraza0987@gmail.com" class="cbtn cp">✉️ asimaliraza0987@gmail.com</a>
-      <a href="tel:+923097390981" class="cbtn">📞 +92 309 7390981</a>
+<section id="contact">
+  <div class="cbox rv">
+    <div class="cgrid"></div>
+    <div class="stag" style="justify-content:center;position:relative;z-index:2;">Contact</div>
+    <h2 class="sh" style="position:relative;z-index:2;">Have a project<br>in mind?</h2>
+    <p class="sp" style="margin:0 auto;text-align:center;max-width:380px;position:relative;z-index:2;">Available for freelance projects and full-time roles. Let's build something great together.</p>
+    <div class="clinks">
+      <a href="mailto:asimaliraza0987@gmail.com" class="cbtn cp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        asimaliraza0987@gmail.com
+      </a>
+      <a href="tel:+923097390981" class="cbtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +92 309 7390981
+      </a>
       <a href="https://github.com/Asim-Ali-Raza" target="_blank" class="cbtn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        Asim Ali Raza
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
       </a>
       <a href="https://wa.me/923097390981" target="_blank" class="cbtn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         WhatsApp
       </a>
     </div>
@@ -459,33 +452,24 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="flogo">Asim<span>.</span>dev</div>
+  <div class="flogo">Asim<em>.</em>dev</div>
   <p>© 2026 Asim Ali Raza — Flutter Developer</p>
-  <p>Made with 💜 in Pakistan</p>
+  <p>Pakistan 🇵🇰</p>
 </footer>
 
 <script>
-  // cursor glow
-  const g = document.getElementById('cglow');
-  document.addEventListener('mousemove', e => {
-    g.style.left = e.clientX + 'px';
-    g.style.top = e.clientY + 'px';
-  });
-
-  // scroll reveal + skill bars
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
         setTimeout(() => {
-          entry.target.classList.add('visible');
-          const bar = entry.target.querySelector('.skbar');
-          if (bar) setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, 350);
-        }, i * 90);
+          e.target.classList.add('on');
+          const b = e.target.querySelector('.skb');
+          if (b) setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 300);
+        }, i * 80);
       }
     });
   }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
