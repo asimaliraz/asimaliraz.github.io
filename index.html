@@ -1,616 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asim Ali Raza — Flutter Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0A0A0F;
-  --bg2:#111118;
-  --bg3:#16161F;
-  --card:#1A1A26;
-  --card2:#1E1E2E;
-  --brd:rgba(255,255,255,0.08);
-  --brd2:rgba(255,255,255,0.13);
-  --tx:#F1F0FF;
-  --mt:rgba(241,240,255,0.55);
-  --lt:rgba(241,240,255,0.3);
-  --hi:#7C6EF8;
-  --hi2:#A99BFF;
-  --ac:#E879F9;
-  --ac2:#F0ABFC;
-  --gr:#34D399;
-  --am:#FBBF24;
-  --rs:#F87171;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;font-size:15px;line-height:1.6;}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:66px;padding:0 72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--brd);}
-.nlogo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--tx);letter-spacing:-.4px;}
-.nlogo em{font-style:normal;background:linear-gradient(135deg,var(--hi),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nlinks{display:flex;gap:4px;list-style:none;align-items:center;}
-.nlinks a{color:var(--mt);text-decoration:none;font-size:14px;font-weight:500;padding:7px 16px;border-radius:9px;transition:all .18s;}
-.nlinks a:hover{color:var(--tx);background:rgba(255,255,255,0.06);}
-.nhire{background:linear-gradient(135deg,var(--hi),var(--ac)) !important;color:#fff !important;padding:8px 22px !important;border-radius:9px;font-weight:600 !important;font-size:13.5px !important;-webkit-text-fill-color:#fff !important;}
-.nhire:hover{opacity:.88 !important;transform:translateY(-1px);}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:110px 72px 80px;position:relative;overflow:hidden;}
-
-/* bg noise grid */
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,110,248,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(124,110,248,0.06) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
-.hero-glow{position:absolute;top:-180px;right:-120px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(124,110,248,0.18) 0%,transparent 70%);pointer-events:none;}
-.hero-glow2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(232,121,249,0.1) 0%,transparent 70%);pointer-events:none;}
-
-.hcontent{max-width:660px;position:relative;z-index:2;}
-.hbadge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(124,110,248,0.35);background:rgba(124,110,248,0.1);padding:6px 16px;border-radius:100px;font-size:11.5px;font-weight:600;color:var(--hi2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:30px;animation:fadeUp .5s ease both;}
-.pulse{width:8px;height:8px;background:var(--gr);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{box-shadow:0 0 0 6px rgba(52,211,153,0)}}
-
-h1{font-family:'Syne',sans-serif;font-size:clamp(54px,6.5vw,88px);font-weight:800;line-height:.95;letter-spacing:-3px;margin-bottom:28px;animation:fadeUp .5s .1s ease both;color:var(--tx);}
-.hgrad{background:linear-gradient(135deg,var(--hi2) 0%,var(--ac2) 60%,#F9A8D4 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-
-.hdesc{font-size:17px;line-height:1.8;color:var(--mt);max-width:500px;margin-bottom:44px;animation:fadeUp .5s .2s ease both;}
-.hdesc strong{color:var(--tx);font-weight:600;}
-
-.hbtns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .3s ease both;}
-.bp{background:linear-gradient(135deg,var(--hi),var(--ac));color:#fff;padding:14px 30px;border-radius:11px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:all .22s;box-shadow:0 4px 24px rgba(124,110,248,.35);}
-.bp:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(124,110,248,.45);}
-.bp svg{width:15px;height:15px;}
-.bsec{color:var(--tx);padding:14px 30px;border-radius:11px;font-size:14px;font-weight:500;text-decoration:none;border:1px solid var(--brd2);background:rgba(255,255,255,0.04);transition:all .2s;}
-.bsec:hover{border-color:rgba(255,255,255,0.22);background:rgba(255,255,255,0.08);transform:translateY(-1px);}
-
-/* hero stats */
-.hstats{position:absolute;right:72px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:2;animation:fadeLeft .7s .4s ease both;}
-.hsc{background:var(--card);border:1px solid var(--brd);border-radius:18px;padding:22px 30px;text-align:center;position:relative;overflow:hidden;}
-.hsc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,110,248,0.5),transparent);}
-.hsn{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--hi2),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hsl{font-size:11px;color:var(--lt);margin-top:5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
-
-/* SCROLL TICKER */
-.mq{padding:14px 0;background:var(--bg2);border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);overflow:hidden;}
-.mqi{display:flex;gap:40px;animation:mq 28s linear infinite;white-space:nowrap;}
-.mit{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--lt);flex-shrink:0;letter-spacing:.3px;}
-.mdot{width:4px;height:4px;border-radius:50%;background:var(--hi);flex-shrink:0;}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* SECTIONS */
-section{padding:100px 72px;position:relative;}
-.stag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--hi2);margin-bottom:14px;}
-.stag-line{width:28px;height:1.5px;background:var(--hi);}
-.sh{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:800;letter-spacing:-1.8px;line-height:1.04;margin-bottom:12px;color:var(--tx);}
-.sp{color:var(--mt);font-size:15.5px;max-width:440px;line-height:1.78;margin-bottom:56px;}
-
-/* ABOUT */
-.agsec{background:var(--bg2);border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);}
-.ag{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start;}
-.at p{color:var(--mt);font-size:15.5px;line-height:1.88;margin-bottom:20px;}
-.at p strong{color:var(--tx);font-weight:600;}
-.achips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;}
-.achip{font-size:12px;font-weight:600;padding:6px 15px;border-radius:100px;border:1px solid var(--brd2);background:rgba(255,255,255,0.04);color:var(--mt);}
-
-.acard{background:var(--card);border:1px solid var(--brd);border-radius:18px;overflow:hidden;position:relative;}
-.acard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,110,248,0.4),transparent);}
-.aci{display:flex;align-items:center;gap:14px;padding:17px 22px;border-bottom:1px solid var(--brd);transition:background .15s;}
-.aci:last-child{border-bottom:none;}
-.aci:hover{background:rgba(255,255,255,0.03);}
-.aci-ic{width:38px;height:38px;border-radius:10px;background:rgba(124,110,248,0.12);border:1px solid rgba(124,110,248,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.aci-ic svg{width:16px;height:16px;color:var(--hi2);}
-.aci-lb{font-size:10.5px;color:var(--lt);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px;}
-.aci-vl{font-size:13.5px;font-weight:500;color:var(--tx);}
-
-/* =========== APPS SECTION =========== */
-.appsbg{background:var(--bg);}
-.apgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;}
-
-.apcard{background:var(--card);border:1px solid var(--brd);border-radius:22px;padding:32px;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.4,0,.2,1);}
-.apcard:hover{transform:translateY(-8px);border-color:rgba(255,255,255,0.18);box-shadow:0 24px 64px rgba(0,0,0,.5);}
-.apcard-top-line{position:absolute;top:0;left:0;right:0;height:2px;}
-
-/* phone mockup SVG inside card */
-.ap-mockup{position:absolute;right:-10px;top:18px;width:120px;opacity:.18;pointer-events:none;transition:opacity .3s;}
-.apcard:hover .ap-mockup{opacity:.28;}
-
-.ap-head{display:flex;align-items:center;gap:13px;margin-bottom:14px;position:relative;z-index:2;}
-.ap-ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid;}
-.ap-ic svg{width:22px;height:22px;}
-.ap-role{font-size:10.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:3px;}
-.ap-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.4px;color:var(--tx);}
-.ap-desc{color:var(--mt);font-size:13.5px;line-height:1.74;margin-bottom:20px;max-width:78%;position:relative;z-index:2;}
-.ap-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px;position:relative;z-index:2;}
-.atag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:.2px;}
-.ap-foot{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid var(--brd);position:relative;z-index:2;}
-.ap-plat{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--lt);font-weight:500;}
-.ap-plat svg{width:13px;height:13px;}
-.ap-cta{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:8px 18px;border-radius:9px;text-decoration:none;transition:all .2s;cursor:pointer;}
-.ap-cta svg{width:13px;height:13px;}
-
-/* SKILLS */
-.skillsbg{background:var(--bg2);border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);}
-.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
-.skcard{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:26px;transition:all .2s;position:relative;overflow:hidden;}
-.skcard:hover{border-color:rgba(124,110,248,0.35);transform:translateY(-3px);}
-.skcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,110,248,0.3),transparent);opacity:0;transition:opacity .3s;}
-.skcard:hover::after{opacity:1;}
-.sk-ic{width:42px;height:42px;border-radius:12px;background:rgba(124,110,248,0.12);border:1px solid rgba(124,110,248,0.22);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-.sk-ic svg{width:20px;height:20px;color:var(--hi2);}
-.skn{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:var(--tx);}
-.skd{font-size:12.5px;color:var(--lt);line-height:1.62;}
-.skbw{margin-top:16px;background:rgba(255,255,255,0.07);border-radius:100px;height:3px;overflow:hidden;}
-.skb{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--hi),var(--ac));transition:width 1.6s cubic-bezier(.4,0,.2,1);}
-
-/* CTA / CONTACT */
-#contact{padding:80px 72px;}
-.cbox{background:var(--card);border:1px solid var(--brd);border-radius:28px;padding:80px 72px;text-align:center;position:relative;overflow:hidden;}
-.cbox-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(124,110,248,0.15) 0%,transparent 70%);pointer-events:none;}
-.cbox-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--hi),var(--ac),transparent);}
-.cbox-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(124,110,248,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,110,248,0.04) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;}
-.cbox .sh{font-size:clamp(36px,5vw,62px);margin-bottom:16px;}
-.cbox .sp{margin:0 auto 0;max-width:380px;text-align:center;}
-
-/* big CTA email */
-.cta-email{display:inline-flex;align-items:center;gap:10px;margin-top:48px;padding:18px 38px;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;background:linear-gradient(135deg,var(--hi),var(--ac));color:#fff;box-shadow:0 6px 32px rgba(124,110,248,.45);transition:all .25s;position:relative;z-index:2;}
-.cta-email:hover{transform:translateY(-3px);box-shadow:0 12px 48px rgba(124,110,248,.55);}
-.cta-email svg{width:18px;height:18px;}
-
-.clinks{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px;position:relative;z-index:2;}
-.cbtn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid var(--brd2);color:var(--mt);background:rgba(255,255,255,0.04);}
-.cbtn svg{width:15px;height:15px;flex-shrink:0;}
-.cbtn:hover{background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.2);color:var(--tx);transform:translateY(-1px);}
-
-/* FOOTER */
-footer{padding:24px 72px;border-top:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;}
-footer p{color:var(--lt);font-size:13px;}
-.flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--tx);}
-.flogo em{font-style:normal;background:linear-gradient(135deg,var(--hi2),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-
-/* ANIMS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeLeft{from{opacity:0;transform:translate(36px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
-.rv{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
-.rv.on{opacity:1;transform:translateY(0);}
-.rv2{opacity:0;transform:translateY(36px);transition:opacity .7s .1s ease,transform .7s .1s ease;}
-.rv2.on{opacity:1;transform:translateY(0);}
-.rv3{opacity:0;transform:translateY(36px);transition:opacity .7s .2s ease,transform .7s .2s ease;}
-.rv3.on{opacity:1;transform:translateY(0);}
-
-@media(max-width:1024px){
-  nav,section,#contact,footer{padding-left:22px;padding-right:22px;}
-  .nlinks{display:none;}
-  .hstats{display:none;}
-  .ag{grid-template-columns:1fr;}
-  .cbox{padding:44px 24px;}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asim Ali Raza – Flutter Developer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nlogo">Asim<em>.</em>dev</div>
-  <ul class="nlinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#apps">Apps</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="mailto:asimaliraza0987@gmail.com" class="nhire">Hire Me</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hcontent">
-    <div class="hbadge">
-      <div class="pulse"></div>
-      Available for Projects
-    </div>
-    <h1>
-      Crafting apps<br>
-      <span class="hgrad">people love.</span>
-    </h1>
-    <p class="hdesc">I'm <strong>Asim Ali Raza</strong> — Flutter developer at <strong>Maxcore Technologies</strong> with <strong>3+ years</strong> building polished, high-performance Android & iOS apps.</p>
-    <div class="hbtns">
-      <a href="#apps" class="bp">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-        See My Work
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav class="navbar navbar-expand-lg" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="logo-mark">DEV</div>
+        <div class="logo-text d-flex flex-column">
+          <span class="logo-name">ASIM.DEV</span>
+          <span class="logo-role">Flutter Developer</span>
+        </div>
       </a>
-      <a href="#contact" class="bsec">Let's Talk →</a>
-    </div>
-  </div>
-  <div class="hstats">
-    <div class="hsc rv"><div class="hsn">3+</div><div class="hsl">Years Exp.</div></div>
-    <div class="hsc rv2"><div class="hsn">3+</div><div class="hsl">Apps Built</div></div>
-    <div class="hsc rv3"><div class="hsn">2</div><div class="hsl">Platforms</div></div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="mq">
-  <div class="mqi">
-    <span class="mit"><span class="mdot"></span>Flutter</span>
-    <span class="mit"><span class="mdot"></span>Dart</span>
-    <span class="mit"><span class="mdot"></span>Provider</span>
-    <span class="mit"><span class="mdot"></span>Firebase & FCM</span>
-    <span class="mit"><span class="mdot"></span>REST APIs</span>
-    <span class="mit"><span class="mdot"></span>GetX</span>
-    <span class="mit"><span class="mdot"></span>Supabase</span>
-    <span class="mit"><span class="mdot"></span>AI Integration</span>
-    <span class="mit"><span class="mdot"></span>Android & iOS</span>
-    <span class="mit"><span class="mdot"></span>Git & GitHub</span>
-    <span class="mit"><span class="mdot"></span>Figma to Flutter</span>
-    <span class="mit"><span class="mdot"></span>Clean Architecture</span>
-    <!-- dup -->
-    <span class="mit"><span class="mdot"></span>Flutter</span>
-    <span class="mit"><span class="mdot"></span>Dart</span>
-    <span class="mit"><span class="mdot"></span>Provider</span>
-    <span class="mit"><span class="mdot"></span>Firebase & FCM</span>
-    <span class="mit"><span class="mdot"></span>REST APIs</span>
-    <span class="mit"><span class="mdot"></span>GetX</span>
-    <span class="mit"><span class="mdot"></span>Supabase</span>
-    <span class="mit"><span class="mdot"></span>AI Integration</span>
-    <span class="mit"><span class="mdot"></span>Android & iOS</span>
-    <span class="mit"><span class="mdot"></span>Git & GitHub</span>
-    <span class="mit"><span class="mdot"></span>Figma to Flutter</span>
-    <span class="mit"><span class="mdot"></span>Clean Architecture</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section id="about" class="agsec">
-  <div class="rv"><div class="stag"><span class="stag-line"></span>About Me</div><h2 class="sh">Who I Am</h2></div>
-  <div class="ag">
-    <div class="at rv">
-      <p>I'm <strong>Asim Ali Raza</strong>, a Flutter developer with <strong>3+ years of experience</strong> building production-ready apps for Android and iOS. I currently work at <strong>Maxcore Technologies</strong> where I lead mobile development on complex, real-world products.</p>
-      <p>I specialize in clean architecture, seamless API integrations, and polished UI — from AI-powered tools to real-time platforms. I care about every detail: performance, UX, and code quality.</p>
-      <div class="achips">
-        <span class="achip">Clean Architecture</span>
-        <span class="achip">API Integration</span>
-        <span class="achip">State Management</span>
-        <span class="achip">UI/UX Polish</span>
-        <span class="achip">Real-time Apps</span>
-        <span class="achip">Performance</span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="bi bi-list" style="font-size:1.5rem;"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="portofolio.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link btn-hire" href="#contact">Hire Me</a></li>
+        </ul>
       </div>
     </div>
-    <div class="acard rv">
-      <div class="aci">
-        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div><div class="aci-lb">Company</div><div class="aci-vl">Maxcore Technologies</div></div>
-      </div>
-      <div class="aci">
-        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div><div class="aci-lb">Location</div><div class="aci-vl">Pakistan 🇵🇰</div></div>
-      </div>
-      <div class="aci">
-        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div><div class="aci-lb">Experience</div><div class="aci-vl">3+ Years Flutter</div></div>
-      </div>
-      <div class="aci">
-        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-        <div><div class="aci-lb">Platforms</div><div class="aci-vl">Android & iOS</div></div>
-      </div>
-      <div class="aci">
-        <div class="aci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div><div class="aci-lb">Email</div><div class="aci-vl">asimaliraza0987@gmail.com</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<!-- APPS -->
-<section id="apps" class="appsbg">
-  <div class="rv"><div class="stag"><span class="stag-line"></span>My Work</div><h2 class="sh">Apps I've Built</h2><p class="sp">Production-ready Flutter applications — clean code, solid architecture, polished UX.</p></div>
-  <div class="apgrid">
-
-    <!-- TalentAngo -->
-    <div class="apcard rv">
-      <div class="apcard-top-line" style="background:linear-gradient(90deg,#2563EB,#7C3AED);"></div>
-      <!-- phone mockup SVG -->
-      <svg class="ap-mockup" viewBox="0 0 120 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="2" width="104" height="216" rx="18" fill="#1E2A4A" stroke="#3B5BDB" stroke-width="1.5"/>
-        <rect x="16" y="14" width="88" height="192" rx="12" fill="#0F1A33"/>
-        <!-- screen content: video feed cards -->
-        <rect x="22" y="22" width="76" height="48" rx="6" fill="#1A2847"/>
-        <rect x="22" y="22" width="76" height="48" rx="6" fill="url(#g1)"/>
-        <rect x="28" y="52" width="40" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
-        <rect x="28" y="44" width="25" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-        <!-- avatar circle -->
-        <circle cx="32" cy="30" r="6" fill="#3B5BDB"/>
-        <rect x="41" y="27" width="30" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="41" y="33" width="20" height="2.5" rx="1.25" fill="rgba(255,255,255,0.25)"/>
-        <!-- play btn -->
-        <circle cx="86" cy="38" r="8" fill="rgba(59,91,219,0.4)"/>
-        <polygon points="83,35 91,38 83,41" fill="white"/>
-
-        <rect x="22" y="76" width="76" height="48" rx="6" fill="#1A2847"/>
-        <circle cx="32" cy="84" r="6" fill="#7C3AED"/>
-        <rect x="41" y="81" width="28" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
-        <rect x="41" y="87" width="18" height="2.5" rx="1.25" fill="rgba(255,255,255,0.25)"/>
-        <circle cx="86" cy="92" r="8" fill="rgba(124,58,237,0.4)"/>
-        <polygon points="83,89 91,92 83,95" fill="white"/>
-        <rect x="28" y="108" width="40" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
-        <rect x="28" y="100" width="25" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
-
-        <!-- bottom nav -->
-        <rect x="16" y="180" width="88" height="26" rx="0" fill="#0A1120"/>
-        <rect x="16" y="180" width="88" height="1" fill="rgba(255,255,255,0.08)"/>
-        <circle cx="36" cy="193" r="5" fill="#3B5BDB"/>
-        <rect x="56" y="189" width="10" height="10" rx="2" fill="rgba(255,255,255,0.15)"/>
-        <circle cx="84" cy="193" r="5" fill="rgba(255,255,255,0.15)"/>
-        <defs>
-          <linearGradient id="g1" x1="22" y1="22" x2="98" y2="70" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1E3A6E" stop-opacity="0.7"/>
-            <stop offset="1" stop-color="#2563EB" stop-opacity="0.1"/>
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <div class="ap-head">
-        <div class="ap-ic" style="background:rgba(37,99,235,0.15);border-color:rgba(37,99,235,0.3);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section id="hero">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-dots"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="hero-title">
+            Flutter Developer
+          </h1>
+          <p class="hero-desc">
+            Passionate Flutter developer building cross-platform mobile applications with clean architecture, polished
+            UI, and reliable performance. Experienced with Dart, Firebase, RESTful APIs, and agile workflows; focused on
+            shipping maintainable, user-friendly mobile products.
+          </p>
+          <div class="hero-actions">
+            <a href="portofolio.html" class="btn-primary-accent">View Projects &nbsp;<i
+                class="bi bi-arrow-right"></i></a>
+            <a href="assets/CV/Asim Flutter.pdf" download target="_blank"
+              class="btn-outline-accent">Download
+              CV &nbsp;<i class="bi bi-download"></i></a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num"><span>30</span>+</div>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num"><span>2</span>+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="ap-role" style="color:#3B82F6;">Recruitment Platform</div>
-          <div class="ap-title">TalentAngo</div>
+        <div class="col-lg-6">
+          <div class="hero-card">
+
+            <!-- Top Row: Left=Name+Info | Right=Image -->
+            <div class="d-flex align-items-stretch gap-3 mb-3">
+                <div class="hc-square-img flex-shrink-0">
+                <img src="assets/images/WhatsApp Image 2026-05-20 at 12.34.59 PM.jpeg" alt="Asim Ali Raza" />
+              </div>
+
+              <!-- LEFT: Name, Role, Info rows -->
+              <div class="d-flex flex-column overflow-hidden justify-content-between flex-grow-1">
+                <div>
+                  <div class="hc-name">Asim Ali Raza</div>
+                  <div class="hc-role mb-3">Junior Flutter Developer</div>
+                  <div class="hc-info-row"><i class="bi bi-geo-alt-fill"></i><span>Multan, Pakistan</span></div>
+                  <div class="hc-info-row"><i class="bi bi-envelope-fill"></i><span>saffiullah751@gmail.com</span></div>
+                  <div class="hc-info-row"><i class="bi bi-telephone-fill"></i><span>03066306461</span></div>
+                  <div class="hc-info-row"><i class="bi bi-mortarboard-fill"></i><span>BS CS · UCP · CGPA 3.98</span>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <!-- Tags below both columns -->
+            <div class="hc-tags">
+              <span class="hc-tag">Agile</span>
+              <span class="hc-tag">Scrum</span>
+              <span class="hc-tag">UAT</span>
+              <span class="hc-tag">SRS</span>
+              <span class="hc-tag">Jira</span>
+              <span class="hc-tag">ClickUp</span>
+            </div>
+
+          </div>
         </div>
       </div>
-      <div class="ap-desc">Full-featured recruitment app with a TikTok-style video feed, real-time chat, membership plans, FCM push notifications, multipart video upload, and watch-time analytics.</div>
-      <div class="ap-tags">
-        <span class="atag" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:#93C5FD;">Flutter</span>
-        <span class="atag" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:#93C5FD;">Provider</span>
-        <span class="atag" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:#93C5FD;">Laravel API</span>
-        <span class="atag" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:#93C5FD;">FCM</span>
-      </div>
-      <div class="ap-foot">
-        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
-        <a href="#" class="ap-cta" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);color:#93C5FD;">
-          View App <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-        </a>
-      </div>
     </div>
+  </section>
 
-    <!-- TikPrompt -->
-    <div class="apcard rv2">
-      <div class="apcard-top-line" style="background:linear-gradient(90deg,#7C3AED,#E879F9);"></div>
-      <!-- AI tool phone mockup -->
-      <svg class="ap-mockup" viewBox="0 0 120 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="2" width="104" height="216" rx="18" fill="#1E1028" stroke="#7C3AED" stroke-width="1.5"/>
-        <rect x="16" y="14" width="88" height="192" rx="12" fill="#130820"/>
-        <!-- sparkle icon top -->
-        <circle cx="60" cy="38" r="14" fill="rgba(124,58,237,0.25)" stroke="rgba(124,58,237,0.5)" stroke-width="1"/>
-        <text x="60" y="44" font-size="14" text-anchor="middle" fill="#C4B5FD">✦</text>
-        <!-- prompt input box -->
-        <rect x="22" y="62" width="76" height="28" rx="7" fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.3)" stroke-width="1"/>
-        <rect x="28" y="71" width="50" height="3" rx="1.5" fill="rgba(196,181,253,0.4)"/>
-        <rect x="28" y="78" width="35" height="3" rx="1.5" fill="rgba(196,181,253,0.25)"/>
-        <!-- generate btn -->
-        <rect x="22" y="98" width="76" height="20" rx="8" fill="url(#gp)"/>
-        <rect x="40" y="104" width="40" height="4" rx="2" fill="rgba(255,255,255,0.85)"/>
-        <!-- image preview area -->
-        <rect x="22" y="126" width="76" height="60" rx="8" fill="rgba(232,121,249,0.08)" stroke="rgba(232,121,249,0.25)" stroke-width="1"/>
-        <!-- abstract art shape inside -->
-        <circle cx="45" cy="156" r="18" fill="rgba(124,58,237,0.3)"/>
-        <circle cx="72" cy="150" r="14" fill="rgba(232,121,249,0.25)"/>
-        <circle cx="60" cy="165" r="10" fill="rgba(167,139,250,0.35)"/>
-        <rect x="22" y="196" width="76" height="6" rx="3" fill="rgba(255,255,255,0.04)"/>
-        <defs>
-          <linearGradient id="gp" x1="22" y1="98" x2="98" y2="118" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#7C3AED"/>
-            <stop offset="1" stop-color="#E879F9"/>
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <div class="ap-head">
-        <div class="ap-ic" style="background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.3);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><path d="M18.5 2.5l3 3L13 14"/></svg>
+  <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="text-start text-md-center mb-5 reveal">
+        <div class="accent-line mx-auto"></div>
+        <h2 class="section-title">About Me</h2>
+        <div class="divider text-start mx-md-auto"></div>
+        <p class="section-sub">A brief overview of who I am and what I bring to the table</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 reveal delay-1">
+          <div class="about-card">
+            <div class="about-icon"><i class="bi bi-phone-fill"></i></div>
+            <h5>Mobile App Development</h5>
+            <p>Building cross-platform Flutter applications with engaging interfaces and smooth performance.</p>
+          </div>
         </div>
-        <div>
-          <div class="ap-role" style="color:#A78BFA;">AI Image Tool</div>
-          <div class="ap-title">TikPrompt</div>
+        <div class="col-md-6 col-lg-3 reveal delay-2">
+          <div class="about-card">
+            <div class="about-icon"><i class="bi bi-brush-fill"></i></div>
+            <h5>UI / UX Design</h5>
+            <p>Designing both functional and polished user experiences for mobile screens and workflows.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal delay-3">
+          <div class="about-card">
+            <div class="about-icon"><i class="bi bi-cloud-fill"></i></div>
+            <h5>Backend Integration</h5>
+            <p>Integrating Firebase, REST APIs and local storage to deliver reliable data-driven apps.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal delay-4">
+          <div class="about-card">
+            <div class="about-icon"><i class="bi bi-people-fill"></i></div>
+            <h5>Collaboration</h5>
+            <p>Working with teams in agile environments to ship stable releases and polished mobile products.</p>
+          </div>
         </div>
       </div>
-      <div class="ap-desc">AI-powered image prompt generator with custom UI, AI API integration for creative prompt generation, image preview, and a smooth workflow for artists and designers.</div>
-      <div class="ap-tags">
-        <span class="atag" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;">Flutter</span>
-        <span class="atag" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;">AI API</span>
-        <span class="atag" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;">Custom UI</span>
-        <span class="atag" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;">Image Gen</span>
-      </div>
-      <div class="ap-foot">
-        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
-        <a href="#" class="ap-cta" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:#C4B5FD;">
-          View App <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-        </a>
-      </div>
     </div>
+  </section>
 
-    <!-- CoderUK -->
-    <div class="apcard rv3">
-      <div class="apcard-top-line" style="background:linear-gradient(90deg,#059669,#34D399);"></div>
-      <!-- booking app phone mockup -->
-      <svg class="ap-mockup" viewBox="0 0 120 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="8" y="2" width="104" height="216" rx="18" fill="#0A1F18" stroke="#059669" stroke-width="1.5"/>
-        <rect x="16" y="14" width="88" height="192" rx="12" fill="#051210"/>
-        <!-- header bar -->
-        <rect x="16" y="14" width="88" height="32" rx="0" fill="rgba(5,150,105,0.15)"/>
-        <rect x="28" y="23" width="40" height="4" rx="2" fill="rgba(52,211,153,0.7)"/>
-        <rect x="28" y="30" width="25" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <!-- calendar grid -->
-        <rect x="22" y="52" width="76" height="56" rx="8" fill="rgba(5,150,105,0.08)" stroke="rgba(5,150,105,0.2)" stroke-width="1"/>
-        <!-- day headers -->
-        <rect x="28" y="58" width="8" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <rect x="40" y="58" width="8" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <rect x="52" y="58" width="8" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <rect x="64" y="58" width="8" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <rect x="76" y="58" width="8" height="3" rx="1.5" fill="rgba(52,211,153,0.35)"/>
-        <!-- day cells -->
-        <rect x="28" y="66" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="40" y="66" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="52" y="66" width="8" height="8" rx="2" fill="rgba(5,150,105,0.8)"/><!-- selected -->
-        <rect x="64" y="66" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="76" y="66" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="28" y="78" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="40" y="78" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="52" y="78" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="64" y="78" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <rect x="76" y="78" width="8" height="8" rx="2" fill="rgba(52,211,153,0.12)"/>
-        <!-- time slots -->
-        <rect x="22" y="116" width="76" height="14" rx="5" fill="rgba(5,150,105,0.15)" stroke="rgba(5,150,105,0.3)" stroke-width="1"/>
-        <rect x="28" y="121" width="30" height="4" rx="2" fill="rgba(52,211,153,0.5)"/>
-        <rect x="22" y="134" width="76" height="14" rx="5" fill="rgba(5,150,105,0.3)"/>
-        <rect x="28" y="139" width="30" height="4" rx="2" fill="rgba(52,211,153,0.8)"/>
-        <rect x="22" y="152" width="76" height="14" rx="5" fill="rgba(5,150,105,0.15)" stroke="rgba(5,150,105,0.3)" stroke-width="1"/>
-        <rect x="28" y="157" width="30" height="4" rx="2" fill="rgba(52,211,153,0.5)"/>
-        <!-- book btn -->
-        <rect x="22" y="174" width="76" height="18" rx="7" fill="#059669"/>
-        <rect x="38" y="180" width="44" height="5" rx="2.5" fill="rgba(255,255,255,0.9)"/>
-      </svg>
-
-      <div class="ap-head">
-        <div class="ap-ic" style="background:rgba(5,150,105,0.15);border-color:rgba(5,150,105,0.3);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+  <!-- ===== SKILLS ===== -->
+  <section id="skills">
+    <div class="container">
+      <div class="text-start text-md-center mb-5 reveal">
+        <div class="accent-line mx-auto"></div>
+        <h2 class="section-title">Core Skills</h2>
+        <div class="divider text-start mx-md-auto"></div>
+        <p class="section-sub">Technologies, tools, and methodologies I work with</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-12 reveal delay-1">
+          <div class="skill-group-title"><i class="bi bi-code-slash me-1"></i> Development Skills</div>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Dart</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Flutter</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Firebase</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> RESTful APIs</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> SQLite</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> UI/UX Design</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> State Management</span>
+          <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Mobile App Architecture</span>
         </div>
-        <div>
-          <div class="ap-role" style="color:#34D399;">Service Booking</div>
-          <div class="ap-title">CoderUK</div>
+        <div class="col-md-12 reveal delay-3">
+          <div class="skill-group-title"><i class="bi bi-tools me-1"></i> Tools & Technologies</div>
+          <div>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Flutter</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Firebase</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> RESTful APIs</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> SQLite</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Git</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Figma</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> VS Code</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> UI/UX</span>
+            <span class="skill-pill"><i class="bi bi-check-circle-fill"></i> Agile Collaboration</span>
+          </div>
         </div>
       </div>
-      <div class="ap-desc">Oil change service booking platform with appointment scheduling, time slot management, booking history, and service reminders — clean and intuitive for all users.</div>
-      <div class="ap-tags">
-        <span class="atag" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6EE7B7;">Flutter</span>
-        <span class="atag" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6EE7B7;">Booking System</span>
-        <span class="atag" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6EE7B7;">REST API</span>
-        <span class="atag" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6EE7B7;">Scheduling</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ EXPERIENCE ═══════════════════════ -->
+  <section id="experience">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 reveal-left">
+          <div class="section-label">Career Path</div>
+          <div class="divider text-start mx-md-auto"></div>
+          <h2 class="section-title">Professional<br>Experience</h2>
+          <p class="section-desc">Building mobile app expertise with a focus on polished UI, reliable performance and
+            timely delivery.</p>
+        </div>
+        <div class="col-lg-8 reveal-right">
+          <div class="timeline">
+
+            <!-- Flutter Experience -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+
+              <div class="timeline-card">
+                <div class="timeline-header flex-nowrap">
+                  <div>
+                    <div class="timeline-company">Maxcore Technologies</div>
+                    <div class="timeline-role">Junior Flutter Developer</div>
+                  </div>
+
+                  <span class="timeline-period">Aug 2023 – Present</span>
+                </div>
+
+                <ul class="timeline-list">
+                  <li>Develop and maintain cross-platform mobile applications using Flutter and Dart.</li>
+                  <li>Integrate Firebase services, RESTful APIs, authentication, and offline data handling.</li>
+                  <li>Design polished UI/UX screens and improve app performance across Android and iOS.</li>
+                  <li>Collaborate with designers and developers using Git to deliver stable releases.</li>
+                  <li>Support testing, debugging, and app deployment across development cycles.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Internship -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+
+              <div class="timeline-card">
+                <div class="timeline-header flex-nowrap">
+                  <div>
+                    <div class="timeline-company">Flutter Internship</div>
+                    <div class="timeline-role">Mobile App Intern</div>
+                  </div>
+
+                  <span class="timeline-period">May 2023 – Aug 2023</span>
+                </div>
+
+                <ul class="timeline-list">
+                  <li>Assisted with Flutter app development, UI design, and feature implementation.</li>
+                  <li>Created interactive screens, supported testing, and helped maintain app quality.</li>
+                  <li>Learned state management, version control, and mobile deployment practices.</li>
+                  <li>Collaborated with senior developers to improve user experience and app flow.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
-      <div class="ap-foot">
-        <div class="ap-plat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>Android & iOS</div>
-        <a href="#" class="ap-cta" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.3);color:#6EE7B7;">
-          View App <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
-        </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ PROJECTS ═══════════════════════ -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-start text-md-center mb-5 reveal">
+        <div class="section-label">Featured Work</div>
+        <div class="divider text-start mx-md-auto"></div>
+        <h2 class="section-title">Projects I've Delivered</h2>
+        <p class="section-desc mx-auto">End-to-end Flutter apps and mobile experiences built for education,
+          productivity, and commerce.</p>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4 reveal delay-1">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-phone-fill"></i></div>
+
+            <h5>Smart Kidz</h5>
+
+            <p>
+              Built an educational Flutter app with interactive lessons, quizzes, and a gamified learning experience.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Education</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal delay-2">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-chat-dots-fill"></i></div>
+
+            <h5>TIK PROMPT</h5>
+
+            <p>
+              Delivered a complete Flutter application with full API integration and polished mobile UI/UX.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">API</span>
+              <span class="project-tag">Mobile</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal delay-3">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-ui-checks"></i></div>
+
+            <h5>ELVE</h5>
+
+            <p>
+              Created a conversion-focused mobile UI/UX experience for an e-commerce Flutter app.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">UI/UX</span>
+              <span class="project-tag">E-commerce</span>
+              <span class="project-tag">Flutter</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal delay-1">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-bag-check-fill"></i></div>
+
+            <h5>Attendance App</h5>
+
+            <p>
+              Developed a mobile attendance system with offline support, automated reporting, and clean UI.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">Offline</span>
+              <span class="project-tag">Productivity</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal delay-2">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-phone-landscape"></i></div>
+
+            <h5>Health Tracker</h5>
+
+            <p>
+              Designed a Flutter health tracking app with responsive screens and simple data visualization.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Health</span>
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">UI/UX</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 reveal delay-3">
+          <div class="project-card">
+            <div class="project-icon"><i class="bi bi-speedometer2"></i></div>
+
+            <h5>Dashboard App</h5>
+
+            <p>
+              Built a mobile dashboard with fast data updates and easy-to-use navigation for data-driven users.
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">Dashboard</span>
+              <span class="project-tag">Analytics</span>
+              <span class="project-tag">Mobile</span>
+            </div>
+
+            <a href="#" class="project-link">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="skillsbg">
-  <div class="rv"><div class="stag"><span class="stag-line"></span>Expertise</div><h2 class="sh">Skills & Stack</h2><p class="sp">Technologies I use daily to ship production mobile apps.</p></div>
-  <div class="skgrid">
-    <div class="skcard rv">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-      <div class="skn">Flutter & Dart</div>
-      <div class="skd">Custom widgets, animations, responsive layouts, platform channels.</div>
-      <div class="skbw"><div class="skb" data-w="93" style="width:0%"></div></div>
+  <section id="skill">
+    <div class="mb-5 justify-content-center m-auto align-items-center d-flex flex-column gap-1 reveal delay-3">
+      <h2 class="section-title">Work</h2>
+      <div class="divider mx-auto"></div>
+      <a class="section-label" style="font-size: 15px;" href="portofolio.html">See Full Portfolio</a>
     </div>
-    <div class="skcard rv">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-      <div class="skn">State Management</div>
-      <div class="skd">Provider and GetX for scalable, clean app architecture.</div>
-      <div class="skbw"><div class="skb" data-w="88" style="width:0%"></div></div>
-    </div>
-    <div class="skcard rv2">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      <div class="skn">REST APIs</div>
-      <div class="skd">HTTP client, JSON parsing, auth, multipart uploads, error handling.</div>
-      <div class="skbw"><div class="skb" data-w="91" style="width:0%"></div></div>
-    </div>
-    <div class="skcard rv2">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-      <div class="skn">Firebase & FCM</div>
-      <div class="skd">Push notifications, authentication, Firestore real-time data.</div>
-      <div class="skbw"><div class="skb" data-w="83" style="width:0%"></div></div>
-    </div>
-    <div class="skcard rv3">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-      <div class="skn">UI/UX Design</div>
-      <div class="skd">Pixel-perfect Figma to Flutter, custom animations, smooth UX.</div>
-      <div class="skbw"><div class="skb" data-w="86" style="width:0%"></div></div>
-    </div>
-    <div class="skcard rv3">
-      <div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="skn">AI Integration</div>
-      <div class="skd">AI APIs for prompt generation, image creation, smart features.</div>
-      <div class="skbw"><div class="skb" data-w="79" style="width:0%"></div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="cbox rv">
-    <div class="cbox-top"></div>
-    <div class="cbox-glow"></div>
-    <div class="cbox-grid"></div>
+  <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="text-start text-md-center mb-5 reveal">
+        <div class="section-label">Get In Touch</div>
+        <div class="divider text-start mx-md-auto"></div>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-desc mx-auto">Have a project in mind? I'd love to hear about it. Let's build something great
+          together.</p>
+      </div>
+      <div class="row justify-content-center g-4">
+        <div class="col-sm-6 col-md-3 reveal delay-1">
+          <a href="mailto:asimaliraza0987@gmail.com">
+            <div class="contact-card text-center">
+              <div class="contact-icon mx-auto"><i class="bi bi-envelope-fill"></i></div>
+              <h6>Email Address</h6>
+              <a href="mailto:asimaliraza0987@gmail.com">asimaliraza0987@gmail.com</a>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-3 reveal delay-2">
+          <a href="tel:+923097390981">
+            <div class="contact-card text-center">
+              <div class="contact-icon mx-auto"><i class="bi bi-telephone-fill"></i></div>
+              <h6>Phone / WhatsApp</h6>
+              <a href="tel:+923097390981">+92 309 739 0981</a>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-3 reveal delay-3">
+          <a href="https://www.linkedin.com/in/asim-ali-raza-5201892ba/" target="_blank">
+            <div class="contact-card text-center">
+              <div class="contact-icon mx-auto"><i class="bi bi-linkedin"></i></div>
+              <h6>LinkedIn Profile</h6>
+              <a href="https://www.linkedin.com/in/asim-ali-raza-5201892ba/" target="_blank">asim-ali-raza</a>
+            </div>
+          </a>
+        </div>
+        <div class="col-sm-6 col-md-3 reveal delay-4">
+          <a href="https://maps.app.goo.gl/H97p7R8K3Yg88N4o6">
+            <div class="contact-card text-center">
+              <div class="contact-icon mx-auto"><i class="bi bi-geo-alt-fill"></i></div>
+              <h6>Location</h6>
+              <p>Multan, Punjab, Pakistan</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- large decorative graphic -->
-    <svg style="position:absolute;right:40px;bottom:0;opacity:.07;pointer-events:none;" width="240" height="240" viewBox="0 0 240 240" fill="none">
-      <rect x="40" y="10" width="160" height="220" rx="24" stroke="white" stroke-width="2"/>
-      <rect x="58" y="30" width="124" height="80" rx="10" fill="white" fill-opacity="0.2"/>
-      <circle cx="120" cy="200" r="10" stroke="white" stroke-width="2"/>
-      <rect x="80" y="125" width="80" height="6" rx="3" fill="white" fill-opacity="0.3"/>
-      <rect x="94" y="138" width="52" height="5" rx="2.5" fill="white" fill-opacity="0.2"/>
-      <rect x="100" y="150" width="40" height="5" rx="2.5" fill="white" fill-opacity="0.15"/>
-    </svg>
-
-    <div class="stag" style="justify-content:center;position:relative;z-index:2;"><span class="stag-line"></span>Contact</div>
-    <h2 class="sh" style="position:relative;z-index:2;">Have a project<br>in mind?</h2>
-    <p class="sp" style="position:relative;z-index:2;text-align:center;margin:0 auto;">Available for freelance projects and full-time roles. Let's build something great together.</p>
-
-    <a href="mailto:asimaliraza0987@gmail.com" class="cta-email">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Send Me an Email
-    </a>
-
-    <div class="clinks">
-      <a href="tel:+923097390981" class="cbtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +92 309 7390981
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer>
+    <div class="container">
+      <a class="navbar-brand justify-content-center d-inline-flex mb-3" href="#hero">
+        <div class="logo-mark me-2">SU</div>
+        <div class="logo-text d-flex flex-column">
+          <span class="logo-name">Asim Ali Raza</span>
+          <span class="logo-role">Flutter Developer</span>
+        </div>
       </a>
-      <a href="https://github.com/asimaliraz" target="_blank" class="cbtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub
-      </a>
-      <a href="https://wa.me/923097390981" target="_blank" class="cbtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        WhatsApp
-      </a>
-      <a href="https://linkedin.com" target="_blank" class="cbtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/saffi-ullah-2b63b5321" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/saffi_digital_dna?igsh=MW15eHNmMWEzOTBpOA=="><i
+            class="bi bi-instagram"></i></a>
+        <a href="tel:03066306461"><i class="bi bi-telephone-fill"></i></a>
+      </div>
+      <div class="mt-3 d-flex gap-3 justify-content-center flex-wrap">
+        <a href="#about" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">About</a>
+        <a href="#skills" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">Skills</a>
+        <a href="#experience" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">Experience</a>
+        <a href="#projects" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">Projects</a>
+        <a href="#portfolio" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">Portfolio</a>
+        <a href="#contact" style="font-size:.82rem;font-weight:500;color:var(--text-gray);">Contact</a>
+      </div>
+      <p class="mt-3">© 2025 <span class="accent">Asim Ali Raza</span>. All rights reserved. Built with ❤️ in Multan,
+        Pakistan.</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- FOOTER -->
-<footer>
-  <div class="flogo">Asim<em>.</em>dev</div>
-  <p>© 2026 Asim Ali Raza — Flutter Developer</p>
-  <p style="color:rgba(241,240,255,0.25);">Pakistan 🇵🇰</p>
-</footer>
+  <!-- BACK TO TOP -->
+  <button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="bi bi-arrow-up"></i>
+  </button>
 
-<script>
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => {
-        e.target.classList.add('on');
-        const b = e.target.querySelector('.skb');
-        if (b) setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 300);
-      }, i * 90);
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.rv, .rv2, .rv3').forEach(el => io.observe(el));
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/main.js"></script>
 </body>
+
 </html>
