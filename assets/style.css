@@ -951,48 +951,76 @@ section {
 
 /* — Mobile App Cards — */
 .app-card {
+    display: flex;
+    flex-direction: column;
     background: var(--bg-white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1.1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 12px;
-    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    overflow: hidden;
     text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    height: 100%;
+}
+
+/* Colored top-border accent transition matching .project-card::after */
+.app-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform var(--transition);
+    transform-origin: left;
+}
+
+.app-card:hover::after {
+    transform: scaleX(1);
 }
 
 .app-card:hover {
-    transform: translateX(5px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-md);
     border-color: var(--accent-mid);
+    text-decoration: none;
 }
 
+/* Padding & Spacing */
+.app-card-header {
+    padding: 1.75rem 1.75rem 0;
+}
+
+.app-card-body {
+    padding: 0.85rem 1.75rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* ── Icon wrap — standard project-icon styling ── */
 .app-icon-wrap {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    overflow: hidden;
-    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
     background: var(--accent-light);
-    border: 1px solid var(--accent-mid);
+    border-radius: 11px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.app-icon-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 14px;
+    border: 1px solid var(--accent-mid);
+    transition: transform var(--transition);
 }
 
 .app-icon-wrap i {
-    font-size: 1.5rem;
     color: var(--accent);
+    font-size: 1.2rem;
+}
+
+.app-card:hover .app-icon-wrap {
+    transform: scale(1.05);
 }
 
 .app-info {
@@ -1001,55 +1029,112 @@ section {
 }
 
 .app-name {
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color var(--transition);
 }
 
+
+.app-desc {
+    font-size: 0.78rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── Footer Meta Row ── */
 .app-meta {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
 }
 
 .app-store-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    background: #1a1a1a;
-    color: #fff !important;
+    gap: 5px;
+    background: var(--bg-soft);
+    color: var(--text-dark) !important;
+    border: 1px solid var(--border);
     border-radius: 6px;
     font-size: 0.65rem;
     font-weight: 600;
-    padding: 3px 9px;
+    padding: 3px 8px;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
-.app-store-badge i {
-    font-size: 0.75rem;
-    color: #fff !important;
+.app-store-badge img {
+    width: 13px !important;
+    height: 13px !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+}
+
+.app-card:hover .app-store-badge {
+    background: var(--accent-light);
+    border-color: var(--accent-mid);
+    color: var(--accent-dark) !important;
 }
 
 .app-category {
-    font-size: 0.68rem;
-    color: var(--text-light);
+    font-size: 0.7rem;
+    background: var(--bg-soft);
+    color: var(--text-gray) !important;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 8px;
     font-weight: 500;
 }
 
+/* ── Arrow CTA — clean project-link style ── */
 .app-arrow {
-    color: var(--accent);
-    opacity: 0;
-    transition: opacity var(--transition), transform var(--transition);
-    margin-left: auto;
-    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent-dark) !important;
+    margin-top: 1rem;
+    transition: gap var(--transition), color var(--transition);
+}
+
+.app-arrow i {
+    font-size: 0.8rem;
+    color: inherit !important;
+    transition: transform var(--transition);
 }
 
 .app-card:hover .app-arrow {
-    opacity: 1;
-    transform: translateX(3px);
+    gap: 10px;
+    color: var(--accent) !important;
+}
+
+.app-card:hover .app-arrow i {
+    transform: translateX(2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 576px) {
+    .app-card-header {
+        padding: 1.25rem 1.25rem 0;
+    }
+    .app-card-body {
+        padding: 0.75rem 1.25rem 1.25rem;
+    }
 }
 
 
